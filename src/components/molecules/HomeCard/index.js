@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
 
-import {Text, DropDown, RadioInput} from '@atoms';
+import {Text, DropDown, RadioInput, Button} from '@atoms';
 //constants
 import {USERS, CHANNELS} from '@constants/data';
 //styles
@@ -11,6 +11,7 @@ import COLORS from '@colors';
 export const HomeCard = () => {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState(null);
+  const [channel, setChannel] = useState(null);
 
   return (
     <Container>
@@ -32,7 +33,15 @@ export const HomeCard = () => {
         2. Choose your channel
       </Text>
 
-      <RadioInput radioData={CHANNELS} />
+      <RadioInput radioData={CHANNELS} setChannel={setChannel} />
+
+      <Button
+        height="50px"
+        width="100%"
+        bgColor={COLORS.PRIMARY}
+        onPress={() => {}}>
+        Commencer
+      </Button>
     </Container>
   );
 };

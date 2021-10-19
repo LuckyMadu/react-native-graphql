@@ -1,42 +1,24 @@
 import React from 'react';
-import {StyleSheet, View, TextInput, TouchableOpacity} from 'react-native';
 import RadioForm from 'react-native-simple-radio-button';
-
-import {Text} from '@atoms';
-
+//styles
+import {Container, RadioInputStyles} from './RadioInput.styles';
 import COLORS from '@colors';
 
 export const RadioInput = props => {
-  const {placeholder, radioData, fieldChanged, field, horizontal} = props;
+  const {radioData, setChannel} = props;
 
   return (
-    <View style={styles.inputWrapper}>
+    <Container style={RadioInputStyles.inputWrapper}>
       <RadioForm
         radio_props={radioData}
-        checkedColor="red"
-        buttonInnerColor="#322418"
-        buttonColor="#aaaaaa"
+        buttonColor={COLORS.TEXT_SECONDARY}
         buttonSize={15}
         animation={false}
         initial={-1}
         selectedButtonColor={COLORS.PRIMARY}
-        // eslint-disable-next-line react-native/no-inline-styles
-        labelStyle={{color: COLORS.BLACK, marginRight: 20, marginBottom: 20}}
-        onPress={text => {}}
+        labelStyle={RadioInputStyles.labelStyle}
+        onPress={text => setChannel(text)}
       />
-    </View>
+    </Container>
   );
 };
-
-const styles = StyleSheet.create({
-  inputWrapper: {
-    marginTop: 20,
-  },
-  input: {
-    borderRadius: 8,
-    borderWidth: 2,
-    backgroundColor: COLORS.WHITE,
-    padding: 14,
-    height: 50,
-  },
-});
