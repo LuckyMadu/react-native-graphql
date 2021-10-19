@@ -1,14 +1,11 @@
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
-
 //components
 import {Text, RadioInput, Button} from '@atoms';
 import {DropDown} from '@organisms';
-
 //constants
 import {USERS, CHANNELS} from '@constants/data';
 import makeToast from '@helpers/toaster';
-
 //styles
 import {Container, DropwdownContainer} from './HomeCard.styles';
 import COLORS from '@colors';

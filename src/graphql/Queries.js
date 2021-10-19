@@ -3,11 +3,13 @@ import {gql} from '@apollo/client';
 export const GET_MORE_MESSAGES = gql`
   {
     fetchMoreMessages(
-      channelId: $channelId
-      messageId: $messageId
-      old: $isOld
+      channelId: "1"
+      messageId: "5763649857859801594"
+      old: false
     ) {
       text
+      datetime
+      userId
     }
   }
 `;
