@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import moment from 'moment';
+import {Avatar} from 'react-native-elements';
 import {
   View,
   Platform,
@@ -8,7 +9,6 @@ import {
   TextInput,
   FlatList,
   RefreshControl,
-  ActivityIndicator,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useQuery} from '@apollo/client';
@@ -23,7 +23,10 @@ import makeToast from '@helpers/toaster';
 import {
   SafeAreaView,
   Container,
-  TextContainer,
+  MainChatContainer,
+  AvatarContainer,
+  DescContainer,
+  ChatContainer,
   TextComponent,
   ChatStyles,
 } from './Chat.styles';
@@ -69,30 +72,62 @@ export const Chat = ({route}) => {
   };
 
   /**
+   * @description Fetch each avatar
+   */
+  const getAvatar = id => {
+    switch (id) {
+      case 'Joyse':
+        return 'https://angular-test-backend-yc4c5cvnnq-an.a.run.app/Joyse.png';
+      case 'Sam':
+        return 'https://angular-test-backend-yc4c5cvnnq-an.a.run.app/Sam.png';
+      case 'Russell':
+        return 'https://angular-test-backend-yc4c5cvnnq-an.a.run.app/Russell.png';
+      default:
+        return null;
+    }
+  };
+
+  /**
    * @description render each chat component
    * @param item chat object
    */
   const renderItem = item => {
     return (
-      <TextContainer
+      <ChatContainer
         style={
           item.userId === null || userId !== item.userId
             ? ChatStyles.receiverBox
             : ChatStyles.senderBox
         }>
-        <TextComponent
-          style={
-            userId !== item.userId
-              ? ChatStyles.receiverText
-              : ChatStyles.senderText
-          }>
-          {item.text}
-          <TextComponent style={ChatStyles.timestamp}>
-            {'\n'}
-            {moment(item.datetime).format('HH:mm A')}
-          </TextComponent>
-        </TextComponent>
-      </TextContainer>
+        <MainChatContainer>
+          <AvatarContainer>
+            <Avatar
+              rounded
+              source={{
+                uri: getAvatar(item.userId),
+              }}
+            />
+            <Text fontSize="12px" fontColor={COLORS.WHITE} fontWeight={600}>
+              {item.userId}
+            </Text>
+          </AvatarContainer>
+          <DescContainer>
+            <TextComponent
+              style={
+                userId !== item.userId
+                  ? ChatStyles.receiverText
+                  : ChatStyles.senderText
+              }>
+              {item.text}
+
+              <TextComponent style={ChatStyles.timestamp}>
+                {'\n'}
+                {moment(item.datetime).format('HH:mm A')}
+              </TextComponent>
+            </TextComponent>
+          </DescContainer>
+        </MainChatContainer>
+      </ChatContainer>
     );
   };
 
@@ -109,7 +144,7 @@ export const Chat = ({route}) => {
         </Text>
         <FlatList
           data={data.fetchMoreMessages}
-          keyExtractor={(item, index) => item.datetime.toString()}
+          keyExtractor={item => item.datetime.toString()}
           renderItem={({item}) => renderItem(item)}
           contentContainerStyle={{
             flexGrow: 1,

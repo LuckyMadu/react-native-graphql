@@ -12,7 +12,19 @@ export const Container = styled.View`
   background-color: #fff;
 `;
 
-export const TextContainer = styled.View``;
+export const MainChatContainer = styled.View`
+  flex: 1;
+  flex-direction: row;
+`;
+
+export const AvatarContainer = styled.View`
+  flex: 1;
+`;
+export const DescContainer = styled.View`
+  flex: 3;
+`;
+
+export const ChatContainer = styled.View``;
 
 export const TextComponent = styled.Text``;
 
@@ -52,6 +64,9 @@ export const ChatStyles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
     paddingTop: 5,
+  },
+  avatar: {
+    color: COLORS.BLACK,
   },
 
   textBoxWrap: {
