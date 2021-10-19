@@ -1,12 +1,13 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text} from 'react-native';
+import {SafeAreaView, Container} from './Home.styles';
 
-const Home = () => {
+export const Home = () => {
   return (
-    <View>
-      <Text>Home</Text>
-    </View>
+    <SafeAreaView>
+      <Container>
+        <Text>daadad</Text>
+      </Container>
+    </SafeAreaView>
   );
 };
-
-export default Home;
