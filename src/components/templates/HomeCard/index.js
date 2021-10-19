@@ -7,6 +7,7 @@ import {DropDown} from '@organisms';
 
 //constants
 import {USERS, CHANNELS} from '@constants/data';
+import makeToast from '@helpers/toaster';
 
 //styles
 import {Container, DropwdownContainer} from './HomeCard.styles';
@@ -18,6 +19,21 @@ export const HomeCard = () => {
   const [channel, setChannel] = useState(null);
 
   const navigation = useNavigation();
+
+  const handleSubmit = () => {
+    if (!user) {
+      makeToast('danger', 'Please select a user!');
+    } else if (!channel) {
+      makeToast('danger', 'Please select a channel!');
+    } else {
+      navigation.navigate('Chat', {
+        info: {
+          userId: user,
+          channelId: channel,
+        },
+      });
+    }
+  };
 
   return (
     <Container>
@@ -45,14 +61,7 @@ export const HomeCard = () => {
         height="50px"
         width="100%"
         bgColor={COLORS.PRIMARY}
-        onPress={() =>
-          navigation.navigate('Chat', {
-            info: {
-              userId: user,
-              channelId: channel,
-            },
-          })
-        }>
+        onPress={() => handleSubmit()}>
         Start Chat
       </Button>
     </Container>

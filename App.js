@@ -1,6 +1,7 @@
 import React from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {ApolloProvider, ApolloClient, InMemoryCache} from '@apollo/client';
+import FlashMessage from 'react-native-flash-message';
 
 //configs
 import {GRAPHQL_URL} from '@config';
@@ -23,6 +24,7 @@ const App = () => {
         <ThemeContextProvider>
           <Container>
             <AppStack />
+            <FlashMessage position="top" />
           </Container>
         </ThemeContextProvider>
       </NavigationContainer>
