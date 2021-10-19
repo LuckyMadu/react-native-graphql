@@ -16,4 +16,7 @@ export const DropStyles = StyleSheet.create({
     fontSize: 16,
     color: COLORS.TEXT_GRAY,
   },
+  containerStyle: {
+    borderColor: COLORS.GRAY,
+  },
 });

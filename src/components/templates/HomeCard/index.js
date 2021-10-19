@@ -1,9 +1,13 @@
 import React, {useState} from 'react';
-import DropDownPicker from 'react-native-dropdown-picker';
+import {useNavigation} from '@react-navigation/native';
 
-import {Text, DropDown, RadioInput, Button} from '@atoms';
+//components
+import {Text, RadioInput, Button} from '@atoms';
+import {DropDown} from '@organisms';
+
 //constants
 import {USERS, CHANNELS} from '@constants/data';
+
 //styles
 import {Container, DropwdownContainer} from './HomeCard.styles';
 import COLORS from '@colors';
@@ -12,6 +16,8 @@ export const HomeCard = () => {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [channel, setChannel] = useState(null);
+
+  const navigation = useNavigation();
 
   return (
     <Container>
@@ -39,8 +45,15 @@ export const HomeCard = () => {
         height="50px"
         width="100%"
         bgColor={COLORS.PRIMARY}
-        onPress={() => {}}>
-        Commencer
+        onPress={() =>
+          navigation.navigate('Chat', {
+            info: {
+              userId: user,
+              channelId: channel,
+            },
+          })
+        }>
+        Start Chat
       </Button>
     </Container>
   );

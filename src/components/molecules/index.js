@@ -1,1 +1,2 @@
-export {HomeCard} from './HomeCard';
+export {Header} from './Header';
+export {Back} from './Back';

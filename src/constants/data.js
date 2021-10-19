@@ -16,14 +16,14 @@ export const USERS = [
 export const CHANNELS = [
   {
     label: 'General Channel',
-    value: 'Joyse',
+    value: '1',
   },
   {
     label: 'Technology Channel',
-    value: 'Sam',
+    value: '2',
   },
   {
     label: 'LGTM Channel',
-    value: 'Russell',
+    value: '3',
   },
 ];

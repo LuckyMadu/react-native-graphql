@@ -1,16 +1,11 @@
 import React from 'react';
-import {Platform, View} from 'react-native';
 import DropDownPicker from 'react-native-dropdown-picker';
 
 //styles
 import {DropStyles, Container} from './DropDown.styles';
-import COLORS from '@colors';
 
 export const DropDown = props => {
-  const {setValue, data, value, placeholder, zIndex, open, setOpen, setUser} =
-    props;
-
-  console.log('data', data);
+  const {setValue, data, value, placeholder, open, setOpen} = props;
 
   return (
     <Container>
@@ -26,6 +21,8 @@ export const DropDown = props => {
         }}
         labelStyle={DropStyles.labelStyle}
         textStyle={DropStyles.textStyle}
+        style={DropStyles.containerStyle}
+        containerStyle={DropStyles.containerStyle}
       />
     </Container>
   );

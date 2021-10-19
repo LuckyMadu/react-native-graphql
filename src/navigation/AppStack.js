@@ -2,7 +2,7 @@ import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 
 //screens
-import {Home} from '../screens';
+import {Home, Chat} from '../screens';
 
 const AppStack = createNativeStackNavigator();
 
@@ -19,6 +19,7 @@ const AppStackNavigator = () => (
       },
     }}>
     <AppStack.Screen name="Home" component={Home} />
+    <AppStack.Screen name="Chat" component={Chat} />
   </AppStack.Navigator>
 );
 
