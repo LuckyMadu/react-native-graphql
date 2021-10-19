@@ -4,6 +4,7 @@ import {ApolloProvider, ApolloClient, InMemoryCache} from '@apollo/client';
 
 //configs
 import {GRAPHQL_URL} from '@config';
+import ThemeContextProvider from '@config/ThemeProvider';
 //stacks
 import AppStack from '@navigation/AppStack';
 //styles
@@ -19,9 +20,11 @@ const App = () => {
   return (
     <ApolloProvider client={client}>
       <NavigationContainer>
-        <Container>
-          <AppStack />
-        </Container>
+        <ThemeContextProvider>
+          <Container>
+            <AppStack />
+          </Container>
+        </ThemeContextProvider>
       </NavigationContainer>
     </ApolloProvider>
   );

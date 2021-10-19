@@ -1,12 +1,14 @@
 import React from 'react';
-import {Text} from 'react-native';
+//components
+import {HomeCard} from '@components';
+//styles
 import {SafeAreaView, Container} from './Home.styles';
 
 export const Home = () => {
   return (
     <SafeAreaView>
       <Container>
-        <Text>daadad</Text>
+        <HomeCard />
       </Container>
     </SafeAreaView>
   );
