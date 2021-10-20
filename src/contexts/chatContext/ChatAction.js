@@ -9,8 +9,25 @@ export const clearMessage = () => ({
   type: 'SAVED_MESSAGE_CLEAR',
 });
 
-//saved unsent messages
+//save unsent messages
 export const savedUnsentMessage = message => ({
   type: 'SAVED_UNSENT_MESSAGE',
   payload: message,
+});
+
+//save message list
+export const saveMessageList = messageList => ({
+  type: 'SAVED_MESSAGE_LIST',
+  payload: messageList,
+});
+
+//save new messages
+export const saveNewMessageList = newMessageList => ({
+  type: 'SAVED_NEW_MESSAGE_LIST',
+  payload: newMessageList,
+});
+
+//clear messages
+export const clearMessageList = () => ({
+  type: 'SAVED_MESSAGE_LIST_CLEAR',
 });

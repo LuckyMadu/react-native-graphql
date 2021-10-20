@@ -1,7 +1,6 @@
 const ChatReducer = (state, action) => {
   switch (action.type) {
     case 'SAVED_MESSAGE':
-      console.log('reducer', action.payload);
       return {
         message: action.payload,
         isFetching: false,
@@ -11,13 +10,32 @@ const ChatReducer = (state, action) => {
       return {
         message: null,
         isFetching: false,
-        error: true,
+        error: false,
       };
     case 'SAVED_UNSENT_MESSAGE':
       return {
         unsentMessages: [...state.unsentMessages, action.payload],
         isFetching: false,
-        error: true,
+        error: false,
+      };
+    case 'SAVED_MESSAGE_LIST':
+      console.log('reducer', action.payload);
+      return {
+        messageList: action.payload,
+        isFetching: false,
+        error: false,
+      };
+    case 'SAVED_NEW_MESSAGE_LIST':
+      return {
+        messageList: [...state.messageList, action.payload],
+        isFetching: false,
+        error: false,
+      };
+    case 'SAVED_MESSAGE_LIST_CLEAR':
+      return {
+        messageList: [],
+        isFetching: false,
+        error: false,
       };
 
     default:

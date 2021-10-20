@@ -28,6 +28,17 @@ export const SendButton = styled.TouchableOpacity`
   align-items: center;
   padding-bottom: 10px;
 `;
+export const ReadMoreButton = styled.TouchableOpacity`
+  flex-direction: row;
+  height: 30px;
+  width: 95%;
+  background-color: ${({theme}) => theme.LIGHT_GRAY};
+  border-radius: 8px;
+  justify-content: center;
+  align-items: center;
+  margin-vertical: 10px;
+  margin-horizontal: 8px;
+`;
 
 export const ChatStyles = StyleSheet.create({
   contentContainerStyle: {

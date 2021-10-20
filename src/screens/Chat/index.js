@@ -4,21 +4,23 @@ import {
   KeyboardAvoidingView,
   TextInput,
   FlatList,
-  RefreshControl,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {useQuery, useMutation} from '@apollo/client';
+import {useLazyQuery, useMutation} from '@apollo/client';
+//components
+import {Text, Loader} from '@atoms';
+import {Back} from '@molecules';
+import {ChatCard} from '@organisms';
 //contexts
 import {ChatContext} from '@contexts/chatContext/ChatContext';
 import {
   savedMessage,
   clearMessage,
   savedUnsentMessage,
+  saveNewMessageList,
+  clearMessageList,
 } from '@contexts/chatContext/ChatAction';
-//components
-import {Text, Loader} from '@atoms';
-import {Back} from '@molecules';
-import {ChatCard} from '@organisms';
+
 //graphql
 import {GET_MORE_MESSAGES} from '@requests/Queries';
 import {CREATE_MESSAGE} from '@requests/Mutations';
@@ -32,6 +34,7 @@ import {
   InputWrapper,
   InnerInputWrapper,
   SendButton,
+  ReadMoreButton,
 } from './Chat.styles';
 import COLORS from '@colors';
 
@@ -39,11 +42,24 @@ export const Chat = ({route}) => {
   const [value, setValue] = useState('');
   const [isSent, setIsSent] = useState(true);
 
-  const {message, dispatch} = useContext(ChatContext);
+  const {message, dispatch, messageList} = useContext(ChatContext);
+
+  console.log('messageList', messageList);
 
   //get params from previous screen
-  const {channelId, userId, latestData} = route.params.info;
+  const {channelId, userId} = route.params.info;
 
+  // graphql load more messages
+  const [
+    runMoreMessageQuery,
+    {loading: latestLoading, error: latestError, data},
+  ] = useLazyQuery(GET_MORE_MESSAGES, {
+    onCompleted: () => {
+      dispatch(saveNewMessageList(data.fetchMoreMessages));
+    },
+  });
+
+  // graphql send message
   const [createMessage, {loading, error}] = useMutation(CREATE_MESSAGE);
 
   //set saved message for initial loading (if user does not send the message)
@@ -55,12 +71,13 @@ export const Chat = ({route}) => {
   useEffect(() => {
     return () => {
       value && isSent && dispatch(clearMessage());
+      //dispatch(clearMessageList());
       setIsSent(true);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  //graphql error handling
+  //graphql error handling for create message
   if (loading) {
     return <Loader />;
   } else if (error) {
@@ -72,6 +89,17 @@ export const Chat = ({route}) => {
     makeToast('danger', error.message);
     //saved and handle unsent messages
     dispatch(savedUnsentMessage(value));
+  }
+
+  //graphql error handling for loading more messages
+  if (latestLoading) {
+    return <Loader />;
+  } else if (latestError) {
+    //TODO: NEED TO REMOVE: log errors
+    console.log('GET_MORE_MESSAGES_ERROR', error);
+
+    //flash message
+    makeToast('danger', error.message);
   }
 
   /**
@@ -104,6 +132,17 @@ export const Chat = ({route}) => {
     dispatch(savedMessage(text));
   };
 
+  //render more messages
+  const loadMessageList = () => {
+    runMoreMessageQuery({
+      variables: {
+        channelId,
+        messageId: '9144206887438441874',
+        old: true,
+      },
+    });
+  };
+
   //send the message
   const handleSubmit = () => {
     createMessage({
@@ -130,7 +169,7 @@ export const Chat = ({route}) => {
         </Text>
 
         {/* Render empty component if there are no messages available */}
-        {!latestData && (
+        {messageList && messageList.length <= 0 && (
           <Text
             fontSize="18px"
             fontColor={COLORS.WARNING}
@@ -141,14 +180,29 @@ export const Chat = ({route}) => {
           </Text>
         )}
 
+        {messageList && messageList.length > 0 && (
+          <ReadMoreButton onPress={() => loadMessageList()}>
+            <Text
+              fontSize="14px"
+              fontColor={COLORS.PRIMARY}
+              fontWeight={500}
+              align="center"
+              margin="0 5px">
+              Read More
+            </Text>
+            <FontAwesome name="arrow-up" color={COLORS.PRIMARY} size={20} />
+          </ReadMoreButton>
+        )}
+
         {/* Render chat list */}
         <FlatList
-          data={latestData ? latestData : []}
-          keyExtractor={item => item.datetime.toString()}
+          data={messageList}
           renderItem={({item}) => renderChatItem(item)}
           contentContainerStyle={ChatStyles.contentContainerStyle}
           inverted={true}
           onEndReachedThreshold={0}
+          //load more messages when reached to top
+          //onEndReached={() => loadMessageList()}
         />
 
         {/* Message text input */}

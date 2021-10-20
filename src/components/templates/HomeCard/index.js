@@ -1,9 +1,12 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {useNavigation} from '@react-navigation/native';
 import {useLazyQuery} from '@apollo/client';
 //components
 import {Text, RadioInput, Button, Loader} from '@atoms';
 import {DropDown} from '@organisms';
+//contexts
+import {ChatContext} from '@contexts/chatContext/ChatContext';
+import {saveMessageList} from '@contexts/chatContext/ChatAction';
 //constants
 import {USERS, CHANNELS} from '@constants/data';
 import makeToast from '@helpers/toaster';
@@ -17,11 +20,30 @@ export const HomeCard = () => {
   const [open, setOpen] = useState(false);
   const [user, setUser] = useState(null);
   const [channel, setChannel] = useState(null);
+  const [status, setStatus] = useState(false);
 
   const navigation = useNavigation();
 
+  const {dispatch} = useContext(ChatContext);
+
+  useEffect(() => {
+    return () => {
+      setStatus(false);
+    };
+  }, []);
+
   //runs after submitting data fields
-  const [runQuery, {loading, error, data}] = useLazyQuery(GET_LATEST_MESSAGES);
+  const [runQuery, {loading, error, data}] = useLazyQuery(
+    GET_LATEST_MESSAGES,
+    {
+      onCompleted: () => {
+        dispatch(saveMessageList(data.fetchLatestMessages));
+      },
+    },
+    {
+      fetchPolicy: 'network-only',
+    },
+  );
 
   if (loading) {
     return <Loader />;
@@ -29,6 +51,14 @@ export const HomeCard = () => {
     makeToast('danger', error.message);
     //TODO: NEED TO REMOVE: log errors
     console.log('GET_LATEST_MESSAGES_ERROR', error);
+  } else if (data && status) {
+    setStatus(false);
+    navigation.navigate('Chat', {
+      info: {
+        userId: user,
+        channelId: channel,
+      },
+    });
   }
 
   //data submit funtion
@@ -43,15 +73,7 @@ export const HomeCard = () => {
           channelId: channel,
         },
       });
-      data &&
-        !error &&
-        navigation.navigate('Chat', {
-          info: {
-            userId: user,
-            channelId: channel,
-            latestData: data?.fetchLatestMessages,
-          },
-        });
+      setStatus(true);
     }
   };
 
