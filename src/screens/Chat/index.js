@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import moment from 'moment';
 import {Avatar} from 'react-native-elements';
 import {
@@ -10,6 +10,10 @@ import {
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useQuery} from '@apollo/client';
+
+//contexts
+import {ChatContext} from '@contexts/chatContext/ChatContext';
+import {getChatSuccess} from '@contexts/chatContext/ChatAction';
 //components
 import {Text, Loader} from '@atoms';
 import {Back} from '@molecules';
@@ -34,22 +38,35 @@ import {
 import COLORS from '@colors';
 
 export const Chat = ({route}) => {
-  const [message, setMessage] = useState('');
+  const [value, setValue] = useState('');
+
+  const {message, dispatch} = useContext(ChatContext);
 
   //get params from previous screen
   const {channelId, userId} = route.params.info;
 
-  const {data, loading, error} = useQuery(GET_MORE_MESSAGES, {
-    channelId: channelId,
-    messageId: '5763649857859801594',
-    isOld: true,
-  });
+  //set context message for initial loading
+  useEffect(() => {
+    setValue(message);
+  }, [message]);
 
-  console.log('data', data);
+  const {data, loading, error} = useQuery(
+    GET_MORE_MESSAGES,
+    {
+      variables: {
+        channelId: channelId,
+        messageId: '5763649857859801594',
+        isOld: true,
+      },
+    },
+    {skip: true},
+  );
+
+  // console.log('GET_MORE_MESSAGES', data);
 
   if (loading) {
     return <Loader />;
-  } else if (error) {
+  } else if (error && !value) {
     makeToast('danger', error.message);
     console.log('error', error);
   }
@@ -130,6 +147,13 @@ export const Chat = ({route}) => {
     );
   };
 
+  const onChangeChat = text => {
+    setValue(text);
+    dispatch(getChatSuccess(text));
+  };
+
+  const submitMessage = () => {};
+
   return (
     <SafeAreaView>
       <Container>
@@ -173,14 +197,14 @@ export const Chat = ({route}) => {
             <InnerInputWrapper>
               <TextInput
                 testID="message"
-                value={message}
+                value={value}
                 placeholder="Type your message here..."
-                onChangeText={setMessage}
+                onChangeText={text => onChangeChat(text)}
                 keyboardType={'ascii-capable'}
                 style={ChatStyles.input}
               />
             </InnerInputWrapper>
-            <SendButton disabled={message ? false : true}>
+            <SendButton disabled={value ? false : true}>
               <FontAwesome name="send" color={COLORS.PRIMARY} size={22} />
             </SendButton>
           </InputWrapper>
