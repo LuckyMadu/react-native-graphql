@@ -1,6 +1,4 @@
 import React, {useState, useContext, useEffect} from 'react';
-import moment from 'moment';
-import {Avatar} from 'react-native-elements';
 import {
   Platform,
   KeyboardAvoidingView,
@@ -12,23 +10,24 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useQuery, useMutation} from '@apollo/client';
 //contexts
 import {ChatContext} from '@contexts/chatContext/ChatContext';
-import {savedMessage} from '@contexts/chatContext/ChatAction';
+import {
+  savedMessage,
+  clearMessage,
+  savedUnsentMessage,
+} from '@contexts/chatContext/ChatAction';
 //components
 import {Text, Loader} from '@atoms';
 import {Back} from '@molecules';
+import {ChatCard} from '@organisms';
 //graphql
-import {GET_MORE_MESSAGES, CREATE_MESSAGE} from '@requests/Queries';
+import {GET_MORE_MESSAGES} from '@requests/Queries';
+import {CREATE_MESSAGE} from '@requests/Mutations';
 //constants
 import makeToast from '@helpers/toaster';
 //styles
 import {
   SafeAreaView,
   Container,
-  InnerChatContainer,
-  AvatarContainer,
-  DescContainer,
-  ChatContainer,
-  TextComponent,
   ChatStyles,
   InputWrapper,
   InnerInputWrapper,
@@ -38,18 +37,42 @@ import COLORS from '@colors';
 
 export const Chat = ({route}) => {
   const [value, setValue] = useState('');
+  const [isSent, setIsSent] = useState(true);
 
   const {message, dispatch} = useContext(ChatContext);
 
   //get params from previous screen
-  const {channelId, userId, data} = route.params.info;
+  const {channelId, userId, latestData} = route.params.info;
 
-  //set context message for initial loading
+  const [createMessage, {loading, error}] = useMutation(CREATE_MESSAGE);
+
+  //set saved message for initial loading (if user does not send the message)
   useEffect(() => {
     setValue(message);
-  }, [message]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  console.log('GET_LATEST_MESSAGES', data);
+  useEffect(() => {
+    return () => {
+      value && isSent && dispatch(clearMessage());
+      setIsSent(true);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  //graphql error handling
+  if (loading) {
+    return <Loader />;
+  } else if (error) {
+    //TODO: NEED TO REMOVE: log errors
+    console.log('CREATE_MESSAGE_ERROR', error);
+    //sent status set to when random error happens
+    setIsSent(false);
+    //flash message
+    makeToast('danger', error.message);
+    //saved and handle unsent messages
+    dispatch(savedUnsentMessage(value));
+  }
 
   /**
    * @description Fetch each title
@@ -68,71 +91,30 @@ export const Chat = ({route}) => {
   };
 
   /**
-   * @description Fetch each avatar
-   * @param id userId
-   */
-  const getAvatar = id => {
-    switch (id) {
-      case 'Joyse':
-        return 'https://angular-test-backend-yc4c5cvnnq-an.a.run.app/Joyse.png';
-      case 'Sam':
-        return 'https://angular-test-backend-yc4c5cvnnq-an.a.run.app/Sam.png';
-      case 'Russell':
-        return 'https://angular-test-backend-yc4c5cvnnq-an.a.run.app/Russell.png';
-      default:
-        return null;
-    }
-  };
-
-  /**
    * @description render each chat component
    * @param item chat object
    */
   const renderChatItem = item => {
-    return (
-      <ChatContainer
-        style={
-          item.userId === null || userId !== item.userId
-            ? ChatStyles.receiverBox
-            : ChatStyles.senderBox
-        }>
-        <InnerChatContainer>
-          <AvatarContainer>
-            <Avatar
-              rounded
-              source={{
-                uri: getAvatar(item.userId),
-              }}
-            />
-            <Text fontSize="12px" fontColor={COLORS.WHITE} fontWeight={600}>
-              {item.userId}
-            </Text>
-          </AvatarContainer>
-          <DescContainer>
-            <TextComponent
-              style={
-                userId !== item.userId
-                  ? ChatStyles.receiverText
-                  : ChatStyles.senderText
-              }>
-              {item.text}
-              <TextComponent style={ChatStyles.timestamp}>
-                {'\n'}
-                {moment(item.datetime).format('HH:mm A')}
-              </TextComponent>
-            </TextComponent>
-          </DescContainer>
-        </InnerChatContainer>
-      </ChatContainer>
-    );
+    return <ChatCard item={item} userId={userId} />;
   };
 
+  //change event for message input
   const onChangeChat = text => {
     setValue(text);
     dispatch(savedMessage(text));
   };
 
-  const handleSubmit = () => {};
+  //send the message
+  const handleSubmit = () => {
+    createMessage({
+      variables: {
+        channelId,
+        text: value,
+        userId,
+      },
+    });
+    setValue('');
+  };
 
   return (
     <SafeAreaView testID="component-home">
@@ -148,7 +130,7 @@ export const Chat = ({route}) => {
         </Text>
 
         {/* Render empty component if there are no messages available */}
-        {!data && (
+        {!latestData && (
           <Text
             fontSize="18px"
             fontColor={COLORS.WARNING}
@@ -161,7 +143,7 @@ export const Chat = ({route}) => {
 
         {/* Render chat list */}
         <FlatList
-          data={data ? data : []}
+          data={latestData ? latestData : []}
           keyExtractor={item => item.datetime.toString()}
           renderItem={({item}) => renderChatItem(item)}
           contentContainerStyle={ChatStyles.contentContainerStyle}

@@ -13,6 +13,12 @@ const ChatReducer = (state, action) => {
         isFetching: false,
         error: true,
       };
+    case 'SAVED_UNSENT_MESSAGE':
+      return {
+        unsentMessages: [...state.unsentMessages, action.payload],
+        isFetching: false,
+        error: true,
+      };
 
     default:
       return {...state};

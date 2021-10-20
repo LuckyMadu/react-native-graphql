@@ -4,6 +4,7 @@ import ChatReducer from './ChatReducer';
 
 const INITIAL_STATE = {
   message: null,
+  unsentMessages: [],
   isFetching: false,
   error: false,
 };
@@ -18,6 +19,7 @@ export const ChatContextProvider = ({children}) => {
     <ChatContext.Provider
       value={{
         message: state.message,
+        unsentMessages: state.unsentMessages,
         isFetching: state.isFetching,
         error: state.error,
         dispatch,

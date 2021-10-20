@@ -28,7 +28,7 @@ export const HomeCard = () => {
   } else if (error) {
     makeToast('danger', error.message);
     //TODO: NEED TO REMOVE: log errors
-    console.log('error', error);
+    console.log('GET_LATEST_MESSAGES_ERROR', error);
   }
 
   //data submit funtion
@@ -49,7 +49,7 @@ export const HomeCard = () => {
           info: {
             userId: user,
             channelId: channel,
-            data: data?.fetchLatestMessages,
+            latestData: data?.fetchLatestMessages,
           },
         });
     }
