@@ -9,16 +9,15 @@ import {
   RefreshControl,
 } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {useQuery} from '@apollo/client';
-
+import {useQuery, useMutation} from '@apollo/client';
 //contexts
 import {ChatContext} from '@contexts/chatContext/ChatContext';
-import {getChatSuccess} from '@contexts/chatContext/ChatAction';
+import {createMessage} from '@contexts/chatContext/ChatAction';
 //components
 import {Text, Loader} from '@atoms';
 import {Back} from '@molecules';
 //graphql
-import {GET_MORE_MESSAGES} from '@requests/Queries';
+import {GET_MORE_MESSAGES, CREATE_MESSAGE} from '@requests/Queries';
 //constants
 import makeToast from '@helpers/toaster';
 //styles
@@ -43,33 +42,14 @@ export const Chat = ({route}) => {
   const {message, dispatch} = useContext(ChatContext);
 
   //get params from previous screen
-  const {channelId, userId} = route.params.info;
+  const {channelId, userId, data} = route.params.info;
 
   //set context message for initial loading
   useEffect(() => {
     setValue(message);
   }, [message]);
 
-  const {data, loading, error} = useQuery(
-    GET_MORE_MESSAGES,
-    {
-      variables: {
-        channelId: channelId,
-        messageId: '5763649857859801594',
-        isOld: true,
-      },
-    },
-    {skip: true},
-  );
-
-  // console.log('GET_MORE_MESSAGES', data);
-
-  if (loading) {
-    return <Loader />;
-  } else if (error && !value) {
-    makeToast('danger', error.message);
-    console.log('error', error);
-  }
+  console.log('GET_LATEST_MESSAGES', data);
 
   /**
    * @description Fetch each title
@@ -149,10 +129,10 @@ export const Chat = ({route}) => {
 
   const onChangeChat = text => {
     setValue(text);
-    dispatch(getChatSuccess(text));
+    dispatch(createMessage(text));
   };
 
-  const submitMessage = () => {};
+  const handleSubmit = () => {};
 
   return (
     <SafeAreaView testID="component-home">
@@ -181,7 +161,7 @@ export const Chat = ({route}) => {
 
         {/* Render chat list */}
         <FlatList
-          data={data ? data.fetchMoreMessages : []}
+          data={data ? data : []}
           keyExtractor={item => item.datetime.toString()}
           renderItem={({item}) => renderChatItem(item)}
           contentContainerStyle={ChatStyles.contentContainerStyle}
@@ -204,7 +184,9 @@ export const Chat = ({route}) => {
                 style={ChatStyles.input}
               />
             </InnerInputWrapper>
-            <SendButton disabled={value ? false : true}>
+            <SendButton
+              disabled={value ? false : true}
+              onPress={() => handleSubmit()}>
               <FontAwesome name="send" color={COLORS.PRIMARY} size={22} />
             </SendButton>
           </InputWrapper>

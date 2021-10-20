@@ -1,11 +1,14 @@
 import React, {useState} from 'react';
 import {useNavigation} from '@react-navigation/native';
+import {useLazyQuery} from '@apollo/client';
 //components
-import {Text, RadioInput, Button} from '@atoms';
+import {Text, RadioInput, Button, Loader} from '@atoms';
 import {DropDown} from '@organisms';
 //constants
 import {USERS, CHANNELS} from '@constants/data';
 import makeToast from '@helpers/toaster';
+//graphql
+import {GET_LATEST_MESSAGES} from '@requests/Queries';
 //styles
 import {Container, DropwdownContainer} from './HomeCard.styles';
 import COLORS from '@colors';
@@ -17,23 +20,44 @@ export const HomeCard = () => {
 
   const navigation = useNavigation();
 
-  const handleSubmit = () => {
+  //runs after submitting data fields
+  const [runQuery, {loading, error, data}] = useLazyQuery(GET_LATEST_MESSAGES);
+
+  if (loading) {
+    return <Loader />;
+  } else if (error) {
+    makeToast('danger', error.message);
+    //TODO: NEED TO REMOVE: log errors
+    console.log('error', error);
+  }
+
+  //data submit funtion
+  const handleSubmit = async () => {
     if (!user) {
       makeToast('danger', 'Please select a user!');
     } else if (!channel) {
       makeToast('danger', 'Please select a channel!');
     } else {
-      navigation.navigate('Chat', {
-        info: {
-          userId: user,
+      await runQuery({
+        variables: {
           channelId: channel,
         },
       });
+      data &&
+        !error &&
+        navigation.navigate('Chat', {
+          info: {
+            userId: user,
+            channelId: channel,
+            data: data?.fetchLatestMessages,
+          },
+        });
     }
   };
 
   return (
     <Container>
+      {/* form part one */}
       <Text fontSize="17px" fontColor={COLORS.TEXT_PRIMARY} fontWeight={500}>
         1. Choose your user
       </Text>
@@ -48,12 +72,13 @@ export const HomeCard = () => {
         />
       </DropwdownContainer>
 
+      {/* form part two */}
       <Text fontSize="17px" fontColor={COLORS.TEXT_PRIMARY} fontWeight={500}>
         2. Choose your channel
       </Text>
-
       <RadioInput radioData={CHANNELS} setChannel={setChannel} />
 
+      {/* navigate to chat screen */}
       <Button
         height="50px"
         width="100%"
