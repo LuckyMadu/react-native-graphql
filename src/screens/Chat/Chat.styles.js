@@ -12,26 +12,47 @@ export const Container = styled.View`
   background-color: #fff;
 `;
 
-export const MainChatContainer = styled.View`
+export const ChatContainer = styled.View``;
+
+export const InnerChatContainer = styled.View`
   flex: 1;
   flex-direction: row;
 `;
 
 export const AvatarContainer = styled.View`
   flex: 1;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
 `;
 export const DescContainer = styled.View`
-  flex: 3;
+  flex: 4;
+  padding: 5px;
 `;
 
-export const ChatContainer = styled.View``;
-
 export const TextComponent = styled.Text``;
+
+export const InputWrapper = styled.View`
+  flex-direction: row;
+  justify-content: center;
+  margin-horizontal: 16px;
+  margin-vertical: 20px;
+`;
+export const InnerInputWrapper = styled.View`
+  flex: 4;
+  justify-content: center;
+`;
+export const SendButton = styled.TouchableOpacity`
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 10px;
+`;
 
 export const ChatStyles = StyleSheet.create({
   senderBox: {
     flex: 1,
-    backgroundColor: '#5494D4',
+    backgroundColor: COLORS.SENDER_BOX,
     marginLeft: '25%',
     marginRight: 16,
     marginVertical: 8,
@@ -43,10 +64,11 @@ export const ChatStyles = StyleSheet.create({
   senderText: {
     fontSize: 16,
     color: COLORS.WHITE,
+    fontWeight: '600',
   },
   receiverBox: {
     flex: 1,
-    backgroundColor: '#4273B7',
+    backgroundColor: COLORS.RECEIVER_BOX,
     marginLeft: 16,
     marginRight: '25%',
     marginVertical: 8,
@@ -58,6 +80,7 @@ export const ChatStyles = StyleSheet.create({
   receiverText: {
     fontSize: 16,
     color: COLORS.WHITE,
+    fontWeight: '600',
   },
   timestamp: {
     fontSize: 10,
@@ -65,27 +88,13 @@ export const ChatStyles = StyleSheet.create({
     alignItems: 'flex-end',
     paddingTop: 5,
   },
-  avatar: {
-    color: COLORS.BLACK,
-  },
 
-  textBoxWrap: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    marginHorizontal: 16,
-    marginVertical: 20,
-  },
-  sendButton: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: 10,
-  },
-  sendButtonText: {
-    color: COLORS.BLACK,
-  },
   loader: {
     marginTop: 10,
     alignItems: 'center',
+  },
+  contentContainerStyle: {
+    flexGrow: 1,
+    justifyContent: 'flex-end',
   },
 });

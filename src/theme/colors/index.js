@@ -2,7 +2,6 @@ const COLORS = {
   // colors
   PRIMARY: '#138496',
   SECONDARY: '#B0BAFF',
-  TERNARY: '#2DD475',
 
   TEXT_PRIMARY: '#222F3E',
   TEXT_SECONDARY: '#aaaaaa',
@@ -18,10 +17,8 @@ const COLORS = {
   DARK_GRAY: '#9fa4ab',
   LIGHT_GRAY: '#F4F4F4',
 
-  // borders
-  BORDER_COLOR: '#F79727',
-  DIVIDER_COLOR: '#C5CCD6',
-  DIVIDER_COLOR_GRAY: '#D7D7D7',
+  SENDER_BOX: '#4cabba',
+  RECEIVER_BOX: '#0f798a',
 
   // success
   SUCCESS: '#4B8510',

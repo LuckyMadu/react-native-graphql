@@ -2,9 +2,7 @@ import React, {useState} from 'react';
 import moment from 'moment';
 import {Avatar} from 'react-native-elements';
 import {
-  View,
   Platform,
-  TouchableOpacity,
   KeyboardAvoidingView,
   TextInput,
   FlatList,
@@ -23,12 +21,15 @@ import makeToast from '@helpers/toaster';
 import {
   SafeAreaView,
   Container,
-  MainChatContainer,
+  InnerChatContainer,
   AvatarContainer,
   DescContainer,
   ChatContainer,
   TextComponent,
   ChatStyles,
+  InputWrapper,
+  InnerInputWrapper,
+  SendButton,
 } from './Chat.styles';
 import COLORS from '@colors';
 
@@ -37,8 +38,6 @@ export const Chat = ({route}) => {
 
   //get params from previous screen
   const {channelId, userId} = route.params.info;
-
-  console.log('channelId', channelId);
 
   const {data, loading, error} = useQuery(GET_MORE_MESSAGES, {
     channelId: channelId,
@@ -73,6 +72,7 @@ export const Chat = ({route}) => {
 
   /**
    * @description Fetch each avatar
+   * @param id userId
    */
   const getAvatar = id => {
     switch (id) {
@@ -91,7 +91,7 @@ export const Chat = ({route}) => {
    * @description render each chat component
    * @param item chat object
    */
-  const renderItem = item => {
+  const renderChatItem = item => {
     return (
       <ChatContainer
         style={
@@ -99,7 +99,7 @@ export const Chat = ({route}) => {
             ? ChatStyles.receiverBox
             : ChatStyles.senderBox
         }>
-        <MainChatContainer>
+        <InnerChatContainer>
           <AvatarContainer>
             <Avatar
               rounded
@@ -119,14 +119,13 @@ export const Chat = ({route}) => {
                   : ChatStyles.senderText
               }>
               {item.text}
-
               <TextComponent style={ChatStyles.timestamp}>
                 {'\n'}
                 {moment(item.datetime).format('HH:mm A')}
               </TextComponent>
             </TextComponent>
           </DescContainer>
-        </MainChatContainer>
+        </InnerChatContainer>
       </ChatContainer>
     );
   };
@@ -145,23 +144,16 @@ export const Chat = ({route}) => {
         <FlatList
           data={data.fetchMoreMessages}
           keyExtractor={item => item.datetime.toString()}
-          renderItem={({item}) => renderItem(item)}
-          contentContainerStyle={{
-            flexGrow: 1,
-            justifyContent: 'flex-end',
-          }}
+          renderItem={({item}) => renderChatItem(item)}
+          contentContainerStyle={ChatStyles.contentContainerStyle}
           inverted={true}
           onEndReachedThreshold={0}
         />
         <KeyboardAvoidingView
           enabled={Platform.OS === 'android' ? false : true}
           behavior="padding">
-          <View style={ChatStyles.textBoxWrap}>
-            <View
-              style={{
-                flex: 4,
-                justifyContent: 'center',
-              }}>
+          <InputWrapper>
+            <InnerInputWrapper>
               <TextInput
                 testID="message"
                 value={message}
@@ -169,13 +161,11 @@ export const Chat = ({route}) => {
                 onChangeText={setMessage}
                 keyboardType={'ascii-capable'}
               />
-            </View>
-            <TouchableOpacity
-              disabled={message ? false : true}
-              style={ChatStyles.sendButton}>
+            </InnerInputWrapper>
+            <SendButton disabled={message ? false : true}>
               <FontAwesome name="send" color={COLORS.PRIMARY} size={22} />
-            </TouchableOpacity>
-          </View>
+            </SendButton>
+          </InputWrapper>
         </KeyboardAvoidingView>
       </Container>
     </SafeAreaView>
