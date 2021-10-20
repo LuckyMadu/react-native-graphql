@@ -1,8 +1,8 @@
 import {gql} from '@apollo/client';
 
 export const GET_LATEST_MESSAGES = gql`
-  {
-    fetchLatestMessages(channelId: "1") {
+  query GET_LATEST_MESSAGES($channelId: String) {
+    fetchLatestMessages(channelId: $channelId) {
       text
       userId
       messageId
@@ -12,12 +12,12 @@ export const GET_LATEST_MESSAGES = gql`
 `;
 
 export const GET_MORE_MESSAGES = gql`
-  {
-    fetchMoreMessages(
-      channelId: "1"
-      messageId: "5763649857859801594"
-      old: false
-    ) {
+  query GET_MORE_MESSAGES(
+    $channelId: String
+    $messageId: String
+    $old: boolean
+  ) {
+    fetchMoreMessages(channelId: $channelId, messageId: $messageId, old: $old) {
       text
       datetime
       userId

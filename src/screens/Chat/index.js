@@ -12,7 +12,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {useQuery, useMutation} from '@apollo/client';
 //contexts
 import {ChatContext} from '@contexts/chatContext/ChatContext';
-import {createMessage} from '@contexts/chatContext/ChatAction';
+import {savedMessage} from '@contexts/chatContext/ChatAction';
 //components
 import {Text, Loader} from '@atoms';
 import {Back} from '@molecules';
@@ -129,7 +129,7 @@ export const Chat = ({route}) => {
 
   const onChangeChat = text => {
     setValue(text);
-    dispatch(createMessage(text));
+    dispatch(savedMessage(text));
   };
 
   const handleSubmit = () => {};

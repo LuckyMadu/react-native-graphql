@@ -1,10 +1,10 @@
 //create message
-export const createMessage = message => ({
-  type: 'CREATE_MESSAGE',
+export const savedMessage = message => ({
+  type: 'SAVED_MESSAGE',
   payload: message,
 });
 
 //clear message
 export const clearMessage = () => ({
-  type: 'CREATE_MESSAGE_CLEAR',
+  type: 'SAVED_MESSAGE_CLEAR',
 });
