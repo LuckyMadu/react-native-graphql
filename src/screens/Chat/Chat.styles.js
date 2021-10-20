@@ -88,13 +88,14 @@ export const ChatStyles = StyleSheet.create({
     alignItems: 'flex-end',
     paddingTop: 5,
   },
-
-  loader: {
-    marginTop: 10,
-    alignItems: 'center',
-  },
   contentContainerStyle: {
     flexGrow: 1,
     justifyContent: 'flex-end',
+  },
+  input: {
+    borderColor: COLORS.GRAY,
+    borderWidth: 1,
+    padding: 14,
+    borderRadius: 8,
   },
 });

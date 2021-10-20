@@ -134,6 +134,7 @@ export const Chat = ({route}) => {
     <SafeAreaView>
       <Container>
         <Back />
+        {/* Header title */}
         <Text
           fontSize="18px"
           fontColor={COLORS.TEXT_PRIMARY}
@@ -141,14 +142,30 @@ export const Chat = ({route}) => {
           align="center">
           {getTitle()}
         </Text>
+
+        {/* Render empty component if there are no messages available */}
+        {!data && (
+          <Text
+            fontSize="18px"
+            fontColor={COLORS.WARNING}
+            fontWeight={600}
+            align="center"
+            margin="50px 0">
+            Sorry, No messages found!
+          </Text>
+        )}
+
+        {/* Render chat list */}
         <FlatList
-          data={data.fetchMoreMessages}
+          data={data ? data.fetchMoreMessages : []}
           keyExtractor={item => item.datetime.toString()}
           renderItem={({item}) => renderChatItem(item)}
           contentContainerStyle={ChatStyles.contentContainerStyle}
           inverted={true}
           onEndReachedThreshold={0}
         />
+
+        {/* Message text input */}
         <KeyboardAvoidingView
           enabled={Platform.OS === 'android' ? false : true}
           behavior="padding">
@@ -160,6 +177,7 @@ export const Chat = ({route}) => {
                 placeholder="Type your message here..."
                 onChangeText={setMessage}
                 keyboardType={'ascii-capable'}
+                style={ChatStyles.input}
               />
             </InnerInputWrapper>
             <SendButton disabled={message ? false : true}>
