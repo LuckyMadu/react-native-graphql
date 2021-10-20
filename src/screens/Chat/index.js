@@ -155,7 +155,7 @@ export const Chat = ({route}) => {
   const submitMessage = () => {};
 
   return (
-    <SafeAreaView>
+    <SafeAreaView testID="component-home">
       <Container>
         <Back />
         {/* Header title */}

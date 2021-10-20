@@ -5,11 +5,10 @@ import {HomeCard} from '@templates';
 
 //styles
 import {SafeAreaView, Container} from './Home.styles';
-import COLORS from '@colors';
 
 export const Home = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView testID="component-home">
       <Container>
         <Header />
         <HomeCard />
