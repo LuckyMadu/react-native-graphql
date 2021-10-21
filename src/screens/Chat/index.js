@@ -18,7 +18,6 @@ import {
   clearMessage,
   savedUnsentMessage,
   saveNewMessageList,
-  clearMessageList,
 } from '@contexts/chatContext/ChatAction';
 //graphql
 import {GET_MORE_MESSAGES} from '@requests/Queries';
@@ -42,8 +41,6 @@ export const Chat = ({route}) => {
   const [isSent, setIsSent] = useState(true);
 
   const {message, dispatch, messageList} = useContext(ChatContext);
-
-  console.log('messageList', messageList);
 
   //get params from previous screen
   const {channelId, userId} = route.params.info;
@@ -70,7 +67,6 @@ export const Chat = ({route}) => {
   useEffect(() => {
     return () => {
       value && isSent && dispatch(clearMessage());
-      //dispatch(clearMessageList());
       setIsSent(true);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -179,6 +175,7 @@ export const Chat = ({route}) => {
           </Text>
         )}
 
+        {/* Load more messages when clicked read more button  */}
         {messageList && messageList.length > 0 && (
           <ReadMoreButton onPress={() => loadMessageList()}>
             <Text
@@ -200,8 +197,8 @@ export const Chat = ({route}) => {
           contentContainerStyle={ChatStyles.contentContainerStyle}
           inverted={true}
           onEndReachedThreshold={0}
-          //load more messages when reached to top
-          onEndReached={() => loadMessageList()}
+          //TODO: load more messages when reached to top
+          //onEndReached={() => loadMessageList()}
         />
 
         {/* Message text input */}

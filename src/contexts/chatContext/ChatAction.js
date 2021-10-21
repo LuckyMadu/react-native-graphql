@@ -27,7 +27,7 @@ export const saveNewMessageList = newMessageList => ({
   payload: newMessageList,
 });
 
-//clear messages
+//clear message list (if needed)
 export const clearMessageList = () => ({
   type: 'SAVED_MESSAGE_LIST_CLEAR',
 });
