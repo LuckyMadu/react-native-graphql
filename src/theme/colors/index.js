@@ -1,5 +1,5 @@
 const COLORS = {
-  // colors
+  //main colors
   PRIMARY: '#138496',
   SECONDARY: '#B0BAFF',
 
@@ -20,16 +20,11 @@ const COLORS = {
   SENDER_BOX: '#4cabba',
   RECEIVER_BOX: '#0f798a',
 
-  // success
-  SUCCESS: '#4B8510',
-
-  // warning
+  //warning
   WARNING: '#ff2640',
 
-  //social-containers
+  //cards
   SHADOW: '#BDB9A6',
-  SHADOW_WHITE: '#CED0D6',
-  SOCIAL_BACKGROUND: '#F6F5F0',
 };
 
 export default COLORS;

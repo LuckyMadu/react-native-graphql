@@ -17,7 +17,6 @@ export const ChatContextProvider = ({children}) => {
   const [state, dispatch] = useReducer(ChatReducer, INITIAL_STATE);
 
   return (
-    // eslint-disable-next-line react/react-in-jsx-scope
     <ChatContext.Provider
       value={{
         message: state.message,

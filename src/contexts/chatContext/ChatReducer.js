@@ -19,15 +19,15 @@ const ChatReducer = (state, action) => {
         error: false,
       };
     case 'SAVED_MESSAGE_LIST':
-      console.log('reducer', action.payload);
       return {
         messageList: action.payload,
         isFetching: false,
         error: false,
       };
     case 'SAVED_NEW_MESSAGE_LIST':
+      //append read more messages into current message list
       return {
-        messageList: [...state.messageList, action.payload],
+        messageList: [...state.messageList, ...action.payload],
         isFetching: false,
         error: false,
       };

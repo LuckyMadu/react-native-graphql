@@ -20,7 +20,6 @@ import {
   saveNewMessageList,
   clearMessageList,
 } from '@contexts/chatContext/ChatAction';
-
 //graphql
 import {GET_MORE_MESSAGES} from '@requests/Queries';
 import {CREATE_MESSAGE} from '@requests/Mutations';
@@ -98,8 +97,8 @@ export const Chat = ({route}) => {
     //TODO: NEED TO REMOVE: log errors
     console.log('GET_MORE_MESSAGES_ERROR', error);
 
-    //flash message
-    makeToast('danger', error.message);
+    //flash message: TODO (crash with unknown error)
+    //makeToast('danger', error);
   }
 
   /**
@@ -202,7 +201,7 @@ export const Chat = ({route}) => {
           inverted={true}
           onEndReachedThreshold={0}
           //load more messages when reached to top
-          //onEndReached={() => loadMessageList()}
+          onEndReached={() => loadMessageList()}
         />
 
         {/* Message text input */}
