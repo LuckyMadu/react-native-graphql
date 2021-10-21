@@ -1,9 +1,8 @@
 import React from 'react';
 import {Avatar} from 'react-native-elements';
 import moment from 'moment';
-
+//components
 import {Text} from '@atoms';
-
 //styles
 import {
   ChatContainer,

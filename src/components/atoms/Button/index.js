@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-
+//components
 import {Text} from '../Text';
+//styles
 import {Container} from './Button.styles';
 
 export const Button = ({

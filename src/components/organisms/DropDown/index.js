@@ -1,6 +1,5 @@
 import React from 'react';
 import DropDownPicker from 'react-native-dropdown-picker';
-
 //styles
 import {DropStyles, Container} from './DropDown.styles';
 

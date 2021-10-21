@@ -1,6 +1,5 @@
 import React, {createContext} from 'react';
 import {ThemeProvider} from 'styled-components';
-
 import colors from '@colors';
 
 const ThemeContext = createContext();

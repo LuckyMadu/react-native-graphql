@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, {useState, useContext, useEffect} from 'react';
 import {
   Platform,
@@ -61,15 +62,14 @@ export const Chat = ({route}) => {
   //set saved message for initial loading (if user does not send the message)
   useEffect(() => {
     setValue(message);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  //clear message text input if submitted the message
   useEffect(() => {
     return () => {
       value && isSent && dispatch(clearMessage());
       setIsSent(true);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //graphql error handling for create message
@@ -124,6 +124,7 @@ export const Chat = ({route}) => {
   //change event for message input
   const onChangeChat = text => {
     setValue(text);
+    //save the text editor messages
     dispatch(savedMessage(text));
   };
 
@@ -147,6 +148,7 @@ export const Chat = ({route}) => {
         userId,
       },
     });
+    //clear inputs
     setValue('');
   };
 

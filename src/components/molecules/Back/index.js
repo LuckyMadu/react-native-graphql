@@ -1,8 +1,7 @@
 import React from 'react';
 import {useNavigation} from '@react-navigation/native';
-
+//components
 import {Text} from '@atoms';
-
 //styles
 import {Container} from './Back.styles';
 import COLORS from '@colors';

@@ -1,7 +1,6 @@
 import React from 'react';
-
+//components
 import {Text} from '@atoms';
-
 //styles
 import {Container} from './Header.styles';
 import COLORS from '@colors';

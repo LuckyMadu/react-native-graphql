@@ -26,13 +26,14 @@ export const HomeCard = () => {
 
   const {dispatch} = useContext(ChatContext);
 
+  //identify user navigated to chat screen or not
   useEffect(() => {
     return () => {
       setStatus(false);
     };
   }, []);
 
-  //runs after submitting data fields
+  //graphql: runs after submitting data fields
   const [runQuery, {loading, error, data}] = useLazyQuery(
     GET_LATEST_MESSAGES,
     {
@@ -45,6 +46,7 @@ export const HomeCard = () => {
     },
   );
 
+  //error handling
   if (loading) {
     return <Loader />;
   } else if (error) {
@@ -52,6 +54,7 @@ export const HomeCard = () => {
     //TODO: NEED TO REMOVE: log errors
     console.log('GET_LATEST_MESSAGES_ERROR', error);
   } else if (data && status) {
+    //identify navigated status
     setStatus(false);
     navigation.navigate('Chat', {
       info: {

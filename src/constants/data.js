@@ -1,3 +1,4 @@
+//users lits
 export const USERS = [
   {
     label: 'Joyse',
@@ -13,6 +14,7 @@ export const USERS = [
   },
 ];
 
+//set of channels
 export const CHANNELS = [
   {
     label: 'General Channel',

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {ActivityIndicator} from 'react-native';
-
+//styles
 import {Container} from './Loader.styles';
 import COLORS from '@colors';
 
