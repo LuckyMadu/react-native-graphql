@@ -66,20 +66,33 @@ const validationSchema = yup.object().shape({
     .string()
     .required('Password is required')
     .min(2, 'Seems Short')
-    .max(10, 'Try shorter password'),
+    .max(10, 'Try shorter password')
+    .matches(
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
+      'Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character',
+    ),
   confirmPassword: yup
     .string()
     .required('Password is required')
     .min(2, 'Seems Short')
     .max(10, 'Try shorter password')
-    .test('password-match', 'Password must match', function (value) {
-      return this.parent.password === value;
-    }),
+    .oneOf([yup.ref('password'), null], 'Passwords must match'),
   agreeTerms: yup
     .boolean()
     .label('Terms')
     .test('is-true', 'Must agree to terms', value => value === true),
 });
+
+const signup = ({email}) => {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (email === 'A@a.com') {
+        reject(new Error('Fakeeeeee email address!!!!'));
+      }
+      resolve(true);
+    });
+  }, 1000);
+};
 
 export const Main = () => {
   return (
@@ -96,11 +109,20 @@ export const Main = () => {
           agreeTerms: false,
         }}
         onSubmit={(values, actions) => {
-          alert(JSON.stringify(values));
+          signup({email: values.email})
+            .then(() => {
+              alert(JSON.stringify(values));
+            })
+            .catch(err => {
+              actions.setFieldError('general', err.message);
+            })
+            .finally(() => {
+              actions.setSubmitting(false);
+            });
 
-          setTimeout(() => {
-            actions.setSubmitting(false);
-          }, 1000);
+          // setTimeout(() => {
+          //   actions.setSubmitting(false);
+          // }, 1000);
         }}>
         {formikProps => (
           <>
@@ -142,7 +164,10 @@ export const Main = () => {
             {formikProps.isSubmitting ? (
               <ActivityIndicator />
             ) : (
-              <Button title="Submit" onPress={formikProps.handleSubmit} />
+              <>
+                <Button title="Submit" onPress={formikProps.handleSubmit} />
+                <Text style={{color: 'red'}}>{formikProps.errors.general}</Text>
+              </>
             )}
           </>
         )}
