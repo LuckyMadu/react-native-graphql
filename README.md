@@ -8,7 +8,7 @@ Simple chat application using react-native and GraphQL
 4. pod install
 5. Now you can run both iOS and Android apps
 
-### Features And Used Technologies
+### Features And Technologies Used 
 
 1. Redux
 
@@ -19,11 +19,11 @@ Simple chat application using react-native and GraphQL
   </tr>
   <tr>
     <td>
-      * Persist data when you are logging into the application <br/> if there is no internet connection, <br/> Here I have used AsyncStorage to save the latest movie list and fetch them if there is no internet connection. <br/>
+      * Persist data when you are logging into the application if there is no internet connection, <br/> Here I have used AsyncStorage to save the latest movie list and fetch them if there is no internet connection. <br/>
       * Makes Debugging Easier
     </td>
     <td> 
-      * Makes Debugging Easier
+      * Learning curve - setup and configuration complexity
     </td> 
   </tr>
 </table>
