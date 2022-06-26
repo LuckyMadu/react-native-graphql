@@ -38,8 +38,9 @@ Simple chat application using react-native and GraphQL
 
 <table>
   <tr>
-    <td>Warn about No internet</td>
-    <td>Warn about No internet - when refresh</td>
+    <td>No internet</td>
+    <td>No internet - when refresh</td>
+    <td>No internet & fetched saved movie list </td>
   </tr>
   <tr>
     <td>
@@ -47,5 +48,7 @@ Simple chat application using react-native and GraphQL
     </td>
     <td> 
       <img src="https://user-images.githubusercontent.com/19740478/175802294-ad1d4733-1118-4330-a7b1-bde87cc3beb7.png" width=500 height=800>         </td>
+    <td> 
+      <img src="https://user-images.githubusercontent.com/19740478/175802258-134df242-d917-43a9-b438-67e92385301e.png" width=500 height=800>         </td>
   </tr>
 </table>
