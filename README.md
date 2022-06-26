@@ -32,7 +32,7 @@ Simple chat application using react-native and GraphQL
 </table>
 
 **3. Styled-Components**
-  - make styles clean and easier
+  - Make styles clean and easier. You cab write actual CSS in your JavaScript.
 
 **4. Unit tests**
   - Used Jest Enzyme
