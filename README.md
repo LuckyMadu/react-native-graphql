@@ -52,3 +52,20 @@ Simple chat application using react-native and GraphQL
       <img src="https://user-images.githubusercontent.com/19740478/175802258-134df242-d917-43a9-b438-67e92385301e.png" width=500 height=800>         </td>
   </tr>
 </table>
+
+<hr/>
+
+### App Screenshots (Android)
+<table>
+  <tr>
+    <td>Home-first page list</td>
+    <td>Home-second page list</td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://user-images.githubusercontent.com/19740478/175802446-e56f8252-cad0-4b05-9aec-55c83488d6a8.png" width=600 height=800>
+    </td>
+    <td> 
+      <img src="https://user-images.githubusercontent.com/19740478/175802466-f8de2d2b-ba03-40f6-bd72-a3302defeced.png" width=600 height=800>         </td>
+  </tr>
+</table>
