@@ -39,7 +39,7 @@ Simple chat application using react-native and GraphQL
 <table>
   <tr>
     <td>Notify user if there’s no internet connection</td>
-    <td>No internet message when pull refresh</td>
+    <td>Message when pull refresh if there’s no internet connection</td>
     <td>Pre-fetched data if there’s no internet connection</td>
   </tr>
   <tr>
