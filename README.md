@@ -16,20 +16,25 @@ Simple chat application using react-native and GraphQL
 ![7](https://user-images.githubusercontent.com/19740478/138288190-7a30e85f-254d-409d-83f7-8148e1df2ce0.png)
 ![8](https://user-images.githubusercontent.com/19740478/138288201-2c051f41-9309-43cc-a23d-30d9debb8d2a.png) -->
 
+![Simulator Screen Shot - iPhone 11 - 2022-06-25 at 16 49 30](https://user-images.githubusercontent.com/19740478/175802185-e5388f74-9252-44f2-b4cd-223ab8a51673.png)
+
+https://user-images.githubusercontent.com/19740478/175802185-e5388f74-9252-44f2-b4cd-223ab8a51673.png
 
 ### App Screenshots
 <table>
   <tr>
-    <td>Home Screen Page</td>
+    <td>Home-first page list</td>
+    <td>Home-second page list</td>
     <td>Pull Refresh</td>
-    <td>Infinite Scrolling</td>
   </tr>
   <tr>
     <td>
       <img src="https://user-images.githubusercontent.com/19740478/175801912-5c20bbce-bbf6-48f4-ba61-19cc2c425b98.png" width=500 height=800>
     </td>
-    <td> <img src="https://user-images.githubusercontent.com/19740478/175801912-5c20bbce-bbf6-48f4-ba61-19cc2c425b98.png" width=500 height=800></td>
-    <td> <img src="https://user-images.githubusercontent.com/19740478/175801912-5c20bbce-bbf6-48f4-ba61-19cc2c425b98.png" width=500 height=800></td>
+    <td> 
+      <img src="https://user-images.githubusercontent.com/19740478/175802156-2cb75f89-38a4-4c33-9e06-bee2c7d1dae9.png" width=500 height=800>         </td>
+    <td> 
+      <img src="https://user-images.githubusercontent.com/19740478/175802185-e5388f74-9252-44f2-b4cd-223ab8a51673.png" width=500 height=800>         </td>
   </tr>
 </table>
 
