@@ -60,7 +60,7 @@ Simple chat application using react-native and GraphQL
   </tr>
   <tr>
     <td>
-      <img src="https://user-images.githubusercontent.com/19740478/175804413-57cc25aa-2840-47c0-8435-e2cb5569123e.png" width=400 height=800>
+      <img src="https://user-images.githubusercontent.com/19740478/175804413-57cc25aa-2840-47c0-8435-e2cb5569123e.png" width=300 height=700>
     </td>
   </tr>
 </table>
