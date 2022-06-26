@@ -38,7 +38,7 @@ Simple chat application using react-native and GraphQL
 
 <table>
   <tr>
-    <td>No internet</td>
+    <td>No internet- show flash message</td>
     <td>No internet - when refresh</td>
     <td>No internet & fetched saved movie list </td>
   </tr>
