@@ -26,12 +26,12 @@ Simple chat application using react-native and GraphQL
   </tr>
   <tr>
     <td>
-      <img src="https://user-images.githubusercontent.com/19740478/175801912-5c20bbce-bbf6-48f4-ba61-19cc2c425b98.png" width=500 height=800>
+      <img src="https://user-images.githubusercontent.com/19740478/175801912-5c20bbce-bbf6-48f4-ba61-19cc2c425b98.png" width=600 height=700>
     </td>
     <td> 
-      <img src="https://user-images.githubusercontent.com/19740478/175802156-2cb75f89-38a4-4c33-9e06-bee2c7d1dae9.png" width=500 height=800>         </td>
+      <img src="https://user-images.githubusercontent.com/19740478/175802156-2cb75f89-38a4-4c33-9e06-bee2c7d1dae9.png" width=600 height=700>         </td>
     <td> 
-      <img src="https://user-images.githubusercontent.com/19740478/175802185-e5388f74-9252-44f2-b4cd-223ab8a51673.png" width=500 height=800>         </td>
+      <img src="https://user-images.githubusercontent.com/19740478/175802185-e5388f74-9252-44f2-b4cd-223ab8a51673.png" width=600 height=700>         </td>
   </tr>
 </table>
 
@@ -45,12 +45,12 @@ Simple chat application using react-native and GraphQL
   
   <tr>
     <td>
-      <img src="https://user-images.githubusercontent.com/19740478/175802258-134df242-d917-43a9-b438-67e92385301e.png" width=500 height=800>
+      <img src="https://user-images.githubusercontent.com/19740478/175802258-134df242-d917-43a9-b438-67e92385301e.png" width=600 height=700>
     </td>
     <td> 
-      <img src="https://user-images.githubusercontent.com/19740478/175802294-ad1d4733-1118-4330-a7b1-bde87cc3beb7.png" width=500 height=800>         </td>
+      <img src="https://user-images.githubusercontent.com/19740478/175802294-ad1d4733-1118-4330-a7b1-bde87cc3beb7.png" width=600 height=700>         </td>
     <td> 
-      <img src="https://user-images.githubusercontent.com/19740478/175802258-134df242-d917-43a9-b438-67e92385301e.png" width=500 height=800>         </td>
+      <img src="https://user-images.githubusercontent.com/19740478/175802258-134df242-d917-43a9-b438-67e92385301e.png" width=600 height=700>         </td>
   </tr>
 </table>
 
