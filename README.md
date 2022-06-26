@@ -19,7 +19,7 @@ Simple chat application using react-native and GraphQL
   </tr>
   <tr>
     <td>
-      * Persist data when you are logging into the application if there is no internet connection, <br/>Here I have used AsyncStorage to save the latest           movie list and fetch them if there is no internet connection. <br/>
+      * Persist data when you are logging into the application if there is no internet connection,Here I have used AsyncStorage to save the latest           movie list and fetch them if there is no internet connection. <br/>
       * Makes Debugging Easier
     </td>
     <td> 
