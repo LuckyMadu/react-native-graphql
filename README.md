@@ -32,3 +32,18 @@ Simple chat application using react-native and GraphQL
     <td> <img src="https://user-images.githubusercontent.com/19740478/175801912-5c20bbce-bbf6-48f4-ba61-19cc2c425b98.png" width=500 height=800></td>
   </tr>
 </table>
+
+<table>
+  <tr>
+    <td>Home Screen Page</td>
+    <td>Pull Refresh</td>
+    <td>Infinite Scrolling</td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://user-images.githubusercontent.com/19740478/175801912-5c20bbce-bbf6-48f4-ba61-19cc2c425b98.png" width=500 height=800>
+    </td>
+    <td> <img src="https://user-images.githubusercontent.com/19740478/175801912-5c20bbce-bbf6-48f4-ba61-19cc2c425b98.png" width=500 height=800></td>
+    <td> <img src="https://user-images.githubusercontent.com/19740478/175801912-5c20bbce-bbf6-48f4-ba61-19cc2c425b98.png" width=500 height=800></td>
+  </tr>
+</table>
