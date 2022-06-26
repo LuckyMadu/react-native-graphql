@@ -10,7 +10,10 @@ Simple chat application using react-native and GraphQL
 
 ### Features And Technologies Used 
 
-1. Redux
+1. Atomic Design Pattern
+  - Atomic Design is a design principle that allows the splitting of UI code into smaller low level chunks (Components) and build it bottom-up to a fully functional page or application.
+
+2. Redux
 
 <table>
   <tr>
@@ -28,8 +31,11 @@ Simple chat application using react-native and GraphQL
   </tr>
 </table>
 
-2. Styled Components
+3. Styled-Components
   - make styles clean and easier
+
+4. Unit tests
+  - Used Jest Enzyme
     
 
 <!-- ![1](https://user-images.githubusercontent.com/19740478/138288066-dd2d69da-4482-4227-894f-6190fcff774a.png)
