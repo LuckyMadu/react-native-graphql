@@ -41,7 +41,8 @@ Simple chat application using react-native and GraphQL
     <td>Notify user if there’s no internet connection</td>
     <td>Message when pull refresh if there’s no internet connection</td>
     <td>Pre-fetched data if there’s no internet connection</td>
-  </tr>
+  </tr>![Simulator Screen Shot - iPhone 11 - 2022-06-26 at 13 07 13 #4](https://user-images.githubusercontent.com/19740478/175804413-57cc25aa-2840-47c0-8435-e2cb5569123e.png)
+
   <tr>
     <td>
       <img src="https://user-images.githubusercontent.com/19740478/175802258-134df242-d917-43a9-b438-67e92385301e.png" width=500 height=800>
@@ -50,6 +51,17 @@ Simple chat application using react-native and GraphQL
       <img src="https://user-images.githubusercontent.com/19740478/175802294-ad1d4733-1118-4330-a7b1-bde87cc3beb7.png" width=500 height=800>         </td>
     <td> 
       <img src="https://user-images.githubusercontent.com/19740478/175802258-134df242-d917-43a9-b438-67e92385301e.png" width=500 height=800>         </td>
+  </tr>
+</table>
+
+<table>
+  <tr>
+    <td>Indication when the app is loading data </td>
+  </tr>
+  <tr>
+    <td>
+      <img src="https://user-images.githubusercontent.com/19740478/175804413-57cc25aa-2840-47c0-8435-e2cb5569123e.png" width=500 height=800>
+    </td>
   </tr>
 </table>
 
